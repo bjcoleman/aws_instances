@@ -11,9 +11,15 @@ create_instances.py script. It will:
 
 Usage: python terminate_script.py <course_name>
 
+Configuration:
+* set the domain_name variable to the domain name you are using for the course
+
 ChatGPT3.5 wrote most of this, but I had to write the DNS record deletion
 code because GhatGPT just couldn't get it right!
 """
+
+domain_name = 'moraviancs.click'
+
 
 def delete_course_resources(course_name):
     # Step 1: Find all EC2 instances with the 'course' tag
@@ -39,7 +45,7 @@ def delete_course_resources(course_name):
     delete_security_group(security_group_name)
 
     # Step 5: Delete DNS records
-    delete_dns_record('moraviancs.click', instance_names)
+    delete_dns_record(domain_name, instance_names)
 
     print("Course resources deleted successfully.")
 
